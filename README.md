@@ -14,9 +14,10 @@ source tree.
 This repository stores the patch file (ulab_patch.diff) for my customized Micropython + ulab for X68000.
 
 ```
-git clone https://github.com/yunkya2/micropython-x68k
+git clone https://github.com/yunkya2/micropython-x68k.git
 cd micropython-x68k
-git apply ../ulab_patch.diff
+git apply ulab_patch.diff
+make -C mpy-cross && cd ports/x68k && make
 ```
 
 
