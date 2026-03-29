@@ -1,6 +1,6 @@
 # micropython-x68k-ulab_patch
 
-This repository stores the patch file (rena_patch.diff) for my customized Micropython + ulab for X68000.
+This repository stores the patch file (ulab_patch.diff) for my customized Micropython + ulab for X68000.
 
 ```
 git clone https://github.com/yunkya2/micropython-x68k
