@@ -1,1 +1,12 @@
-
+diff --git a/ports/x68k/mpconfigport.h b/ports/x68k/mpconfigport.h
+index dc84ae3e4..437eac1ec 100644
+--- a/ports/x68k/mpconfigport.h
++++ b/ports/x68k/mpconfigport.h
+@@ -42,6 +42,7 @@
+ #define ULAB_NUMPY_HAS_SUBTRACT (1)
+ #define ULAB_NUMPY_HAS_MULTIPLY (1)
+ #define ULAB_NUMPY_HAS_DIVIDE (1)
++#define NDARRAY_HAS_REPEAT (1) 
+ 
+ 
+ 
