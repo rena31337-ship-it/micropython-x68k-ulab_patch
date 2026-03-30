@@ -19,6 +19,14 @@ cd micropython-x68k
 git apply ulab_patch.diff
 make -C mpy-cross && cd ports/x68k && make
 ```
+⚠️ mpy-cross のビルドについて（macOS / Fedora）
+macOS（Clang）や一部の Linux 環境では、mpy-cross のビルド時に
+コンパイラ警告がエラー扱いされて失敗する場合があります。
+
+その場合は以下のように -Werror を無効化してください。
+
+    make -C mpy-cross CFLAGS_EXTRA="-Wno-error"
+
 ⚠️ 注意：サンプルコードは UTF-8 になっているので、X68000 で実行する前に Shift-JIS に変換してください。
 
 ⚠️ Note: Sample Python scripts are stored as UTF-8 on GitHub.
