@@ -65,7 +65,7 @@ array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], dtype=float32)
 ```
 ## The repository includes a comprehensive test script:
 
-- sample/ulab_feature_test.py  
+  sample/ulab_feature_test.py  
   A full feature test covering ndarray creation, slicing,
   reductions, dot, FFT, flatten, and the lightweight complex ndarray.
 
@@ -142,7 +142,7 @@ print(a.flatten())
 ```
 ## 以下の総合テストスクリプトを同梱しています：
 
-- sample/ulab_feature_test.py  
+  sample/ulab_feature_test.py  
   ndarray の生成、スライス、集約関数、行列積、FFT、
   flatten、軽量 complex ndarray など、主要な機能をまとめてテストできます。
 
