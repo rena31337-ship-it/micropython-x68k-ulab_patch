@@ -82,6 +82,19 @@ Sample Python scripts on GitHub are UTF‑8.
 X68000 MicroPython does not fully support UTF‑8 multibyte characters.
 Please convert .py files to Shift‑JIS before running them.
 
+### Build notes (Mac / Linux)
+
+Depending on your compiler, you may need to disable some warnings:
+
+- macOS (Clang):
+  make CFLAGS_EXTRA="-Wno-error"
+
+- Fedora (GCC):
+  make CFLAGS_EXTRA="-Wno-error=maybe-uninitialized"
+
+- WSL2 Ubuntu:
+  No special flags required.
+
 
 ## このパッチは X68000 版 Micropython のソースツリー専用です。
 
@@ -158,3 +171,24 @@ X68000 版 ulab には ndarray.reshape() メソッドが実装されていませ
 GitHub 上のサンプルは UTF‑8 です。
 X68000 版 Micropython は UTF‑8 のマルチバイト文字を完全には扱えません。
 実行前に .py を Shift‑JIS に変換してください。
+
+ビルドオプションについて（macOS / Linux）
+使用しているコンパイラによっては、
+Micropython のビルド時に警告が多数表示される場合があります。
+これらは動作に影響しませんが、ビルドを通すために
+以下のオプションを追加する必要があります。
+
+-macOS（Clang）
+
+make CFLAGS_EXTRA="-Wno-error"
+
+-Fedora（GCC）
+
+make CFLAGS_EXTRA="-Wno-error=maybe-uninitialized"
+
+-WSL2 Ubuntu（GCC）  
+特別なオプションは不要です。
+
+※ macOS や Fedora では、Micropython 本体のコードに対して
+　Clang / GCC が厳しく警告を出すことがありますが、
+　これらは無害であり、ビルドや動作には影響しません。
