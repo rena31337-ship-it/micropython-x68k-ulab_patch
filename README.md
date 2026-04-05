@@ -69,6 +69,15 @@ array([[1.0, 2.0, 3.0],
 [4.0, 5.0, 6.0]], dtype=float32)
 array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], dtype=float32)
 ```
+## The repository includes a comprehensive test script:
+
+- sample/ulab_feature_test.py  
+  A full feature test covering ndarray creation, reshape, slicing,
+  reductions, dot, FFT, repeat, flatten, and the lightweight complex ndarray.
+
+Please convert the file to Shift‑JIS before running it on the X68000.
+
+
 ### Encoding note
 
 Sample Python scripts on GitHub are UTF‑8.
@@ -137,6 +146,14 @@ a = np.array([[1, 2, 3],
 print(a)
 print(a.flatten())
 ```
+## 以下の総合テストスクリプトを同梱しています：
+
+- sample/ulab_feature_test.py  
+  ndarray の生成、reshape、スライス、集約関数、行列積、FFT、repeat、
+  flatten、軽量 complex ndarray など、全機能をまとめてテストできます。
+
+X68000 で実行する前に Shift‑JIS に変換してください。
+
 
 ## 文字コードについて
 
