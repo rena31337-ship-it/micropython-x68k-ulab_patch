@@ -69,11 +69,11 @@ array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], dtype=float32)
   A full feature test covering ndarray creation, slicing,
   reductions, dot, FFT, flatten, and the lightweight complex ndarray.
 
-# Note:
-# The X68000 port of ulab does not implement the ndarray.reshape() method.
-# Calling a.reshape(...) will always raise an error on this platform.
-# Only the functional form np.reshape() exists, and even that supports
-# only limited use cases (mainly flattening to 1D).
+## Note:
+### The X68000 port of ulab does not implement the ndarray.reshape() method.
+### Calling a.reshape(...) will always raise an error on this platform.
+### Only the functional form np.reshape() exists, and even that supports
+### only limited use cases (mainly flattening to 1D).
 
 
 ### Encoding note
