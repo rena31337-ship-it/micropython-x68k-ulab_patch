@@ -1,17 +1,12 @@
-Note:
-This patch is intended for my customized Micropython + ulab build for X68000.
-It includes additional features such as ndarray.repeat(), which are not enabled
-in the default ulab configuration. Please apply it only to the corresponding
-source tree.
+## This patch is intended for the Micropython for the X68000 source tree only.
 
-注意:
-このパッチは、X68000 用にカスタマイズした Micropython + ulab 向けです。
-標準の ulab では有効になっていない ndarray.repeat() などの機能を含みます。
-対応するソースツリーにのみ適用してください。
+## micropython-x68k-ulab_patch
+This repository stores the patch file (ulab_patch.diff) for my customized
+Micropython for the X68000 + ulab build.
 
-# micropython-x68k-ulab_patch
-
-This repository stores the patch file (ulab_patch.diff) for my customized Micropython + ulab for X68000.
+The patch enables several ulab features that are disabled in the default
+configuration, and also includes a lightweight implementation of complex ndarray
+(non‑NumPy compatible, designed specifically for the X68000 environment).
 
 ```
 git clone https://github.com/yunkya2/micropython-x68k.git
@@ -19,58 +14,132 @@ cd micropython-x68k
 git apply ulab_patch.diff
 make -C mpy-cross && cd ports/x68k && make
 ```
-⚠️ mpy-cross のビルドについて（macOS / Fedora）
-macOS（Clang）や一部の Linux 環境では、mpy-cross のビルド時に
-コンパイラ警告がエラー扱いされて失敗する場合があります。
 
-その場合は以下のように -Werror を無効化してください。
+## Important Notes
 
-    make -C mpy-cross CFLAGS_EXTRA="-Wno-error"
+Do not use dtype inference.
+arange, linspace, and implicit list→ndarray conversions do not work reliably on Micropython + ulab (X68000).
+Always specify dtype explicitly when creating ndarrays.
 
-⚠️ 注意：サンプルコードは UTF-8 になっているので、X68000 で実行する前に Shift-JIS に変換してください。
+Includes a lightweight complex ndarray implementation.
+This is not NumPy compatible, but supports creation, indexing, printing, and vectorized abs() implemented in C.
 
-⚠️ Note: Sample Python scripts are stored as UTF-8 on GitHub.
-X68000 MicroPython does not fully support UTF-8 multibyte characters, so
-please convert .py files to Shift-JIS before running them on X68000.
+Large arrays may fail due to memory constraints.
+(Example: 256×256 OK, 512×512 → MemoryError)
 
+## Tested features
 
+ndarray creation (array, zeros, ones)
 
+reshape / transpose
 
-Tested features:
-- ndarray creation (array, zeros, ones)
-- reshape, transpose
-- slicing
-- elementwise operations
-- reductions (sum, min, max, mean)
-- dot (matmul)
-- FFT
-- repeat
-- flatten
-- memory limit behavior
+slicing
 
-動作確認済み:
-- ndarray 基本操作
-- reshape / transpose
-- スライス
-- 要素演算
-- 各種集約関数
-- 行列積
-- FFT
-- repeat / flatten
-- メモリ限界テスト
+elementwise operations
 
-```python
+reductions (sum, min, max, mean)
+
+dot (matmul)
+
+FFT
+
+repeat
+
+flatten
+
+lightweight complex ndarray (non‑NumPy compatible)
+
+memory limit behavior
+
+## Sample
+
+```
 from ulab import numpy as np
 
 a = np.array([[1, 2, 3],
-              [4, 5, 6]])
+[4, 5, 6]])
 
 print(a)
 print(a.flatten())
 ```
-### Output
+
+## Output
 ```
 array([[1.0, 2.0, 3.0],
-       [4.0, 5.0, 6.0]], dtype=float32)
+[4.0, 5.0, 6.0]], dtype=float32)
 array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], dtype=float32)
 ```
+### Encoding note
+
+Sample Python scripts on GitHub are UTF‑8.
+X68000 MicroPython does not fully support UTF‑8 multibyte characters.
+Please convert .py files to Shift‑JIS before running them.
+
+
+## このパッチは X68000 版 Micropython のソースツリー専用です。
+
+# 日本語版 README
+
+micropython-x68k-ulab_patch
+
+このリポジトリは、X68000 用 Micropython に ulab を組み込んだ
+カスタムビルド向けのパッチファイル（ulab_patch.diff）を公開しています。
+
+```
+git clone https://github.com/yunkya2/micropython-x68k.git
+cd micropython-x68k
+git apply ulab_patch.diff
+make -C mpy-cross && cd ports/x68k && make
+```
+
+## 注意事項
+
+dtype 推論は使用しないでください。
+arange / linspace / 暗黙の list→ndarray 変換は X68000 版 Micropython + ulab では正しく動作しません。
+ndarray 作成時は必ず dtype を明示してください。
+
+complex ndarray は NumPy 互換ではありません。
+X68000 上で動作するための軽量実装で、生成・アクセス・print 表示・abs() のベクトル化（C 実装）に対応します。
+
+大規模配列はメモリ不足で失敗する可能性があります。
+（例：256×256 は OK、512×512 は MemoryError）
+
+## 動作確認済み
+
+ndarray 基本操作
+
+reshape / transpose
+
+スライス
+
+要素演算
+
+各種集約関数
+
+行列積
+
+FFT
+
+repeat / flatten
+
+軽量 complex ndarray（独自実装）
+
+メモリ限界テスト
+
+## サンプル
+
+```
+from ulab import numpy as np
+
+a = np.array([[1, 2, 3],
+[4, 5, 6]])
+
+print(a)
+print(a.flatten())
+```
+
+## 文字コードについて
+
+GitHub 上のサンプルは UTF‑8 です。
+X68000 版 Micropython は UTF‑8 のマルチバイト文字を完全には扱えません。
+実行前に .py を Shift‑JIS に変換してください。
